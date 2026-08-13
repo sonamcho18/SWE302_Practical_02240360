@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSMS — Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="topbar">
+    <div>
+      <div class="brand"><span class="mark">CST</span> Student Management System</div>
+      <div class="sub">Academic Records Portal</div>
+    </div>
+    <nav>
+      <a href="{{ url_for('dashboard') }}" class="active">Dashboard</a>
+      <a href="{{ url_for('payment') }}">Tuition Payment</a>
+      <a href="{{ url_for('register') }}">Registration</a>
+      <a href="{{ url_for('results') }}">Results</a>
+      <a href="{{ url_for('logout') }}">Log Out</a>
+    </nav>
+  </div>
+
+  <div class="shell">
+    <div class="page-eyebrow">Welcome back</div>
+    <h1 class="page-title">Student Dashboard</h1>
+    <div class="page-desc">Overview of your enrolment status at CST College.</div>
+
+    <div class="id-card">
+      <div class="id-top">
+        <div>
+          <div class="id-crest">CST College · Student ID Card</div>
+          <div class="id-name">Student {{ student_id }}</div>
+          <div class="id-number">ID No. {{ student_id }}</div>
+        </div>
+        <div class="id-photo">{{ student_id[:2] }}</div>
+      </div>
+      <div class="id-chips">
+        <span class="chip {{ 'on' if state.tuition_paid else 'off' }}">
+          <span class="dot"></span> Tuition {{ 'Paid' if state.tuition_paid else 'Unpaid' }}
+        </span>
+        <span class="chip {{ 'on' if state.drug_test_verified else 'off' }}">
+          <span class="dot"></span> Drug Test {{ 'Verified' if state.drug_test_verified else 'Pending' }}
+        </span>
+        <span class="chip {{ 'on' if state.is_registered else 'off' }}">
+          <span class="dot"></span> {{ 'Registered' if state.is_registered else 'Not Registered' }}
+        </span>
+      </div>
+      <div class="id-barcode"></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h2>Tuition Payment</h2>
+        <p style="font-size:13.5px;color:var(--muted)">Pay via Mobile Banking and upload your proof of transfer.</p>
+        <a class="btn gold" style="display:inline-block;width:auto;text-decoration:none;" href="{{ url_for('payment') }}">Go to Payment</a>
+      </div>
+      <div class="card">
+        <h2>Module Registration</h2>
+        <p style="font-size:13.5px;color:var(--muted)">Register once payment, drug test and the registration period allow it.</p>
+        <a class="btn gold" style="display:inline-block;width:auto;text-decoration:none;" href="{{ url_for('register') }}">Go to Registration</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

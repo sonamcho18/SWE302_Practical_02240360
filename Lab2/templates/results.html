@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSMS — Results</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="topbar">
+    <div>
+      <div class="brand"><span class="mark">CST</span> Student Management System</div>
+      <div class="sub">Academic Records Portal</div>
+    </div>
+    <nav>
+      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('payment') }}">Tuition Payment</a>
+      <a href="{{ url_for('register') }}">Registration</a>
+      <a href="{{ url_for('results') }}" class="active">Results</a>
+      <a href="{{ url_for('logout') }}">Log Out</a>
+    </nav>
+  </div>
+
+  <div class="shell">
+    <div class="page-eyebrow">Section 4</div>
+    <h1 class="page-title">Semester Results</h1>
+    <div class="page-desc">Only registered students may view their semester results.</div>
+
+    <div class="card">
+      {% if ok %}
+        <h2>Your Grades</h2>
+        <table>
+          <thead>
+            <tr><th>Module Code</th><th>Module Title</th><th>Grade</th></tr>
+          </thead>
+          <tbody>
+            {% for row in data %}
+              <tr>
+                <td>{{ row.module_code }}</td>
+                <td>{{ row.module_title }}</td>
+                <td class="grade">{{ row.grade }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <a class="dl-btn" href="#">⬇ Download as PDF</a>
+      {% else %}
+        <div class="msg err">{{ data }}</div>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSMS — Registration</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="topbar">
+    <div>
+      <div class="brand"><span class="mark">CST</span> Student Management System</div>
+      <div class="sub">Academic Records Portal</div>
+    </div>
+    <nav>
+      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('payment') }}">Tuition Payment</a>
+      <a href="{{ url_for('register') }}" class="active">Registration</a>
+      <a href="{{ url_for('results') }}">Results</a>
+      <a href="{{ url_for('logout') }}">Log Out</a>
+    </nav>
+  </div>
+
+  <div class="shell">
+    <div class="page-eyebrow">Section 2</div>
+    <h1 class="page-title">Module Registration</h1>
+    <div class="page-desc">Registration requires paid tuition, a verified drug test report and an open registration period.</div>
+
+    <div class="card" style="max-width:480px;">
+      <h2>Eligibility</h2>
+      <div class="id-chips" style="margin-top:0;">
+        <span class="chip {{ 'on' if state.tuition_paid else 'off' }}" style="color:var(--ink); border-color:var(--line);">
+          <span class="dot"></span> Payment
+        </span>
+        <span class="chip {{ 'on' if state.drug_test_verified else 'off' }}" style="color:var(--ink); border-color:var(--line);">
+          <span class="dot"></span> Drug Test
+        </span>
+        <span class="chip on" style="color:var(--ink); border-color:var(--line);">
+          <span class="dot"></span> Period Open
+        </span>
+      </div>
+      <div class="msg {{ 'ok' if eligible else 'err' }}" style="margin-top:16px;">{{ elig_msg }}</div>
+    </div>
+
+    <div class="card" style="max-width:480px;">
+      <h2>Register a Module</h2>
+      <form method="POST">
+        <label for="module_code">Module Code</label>
+        <input type="text" id="module_code" name="module_code" placeholder="e.g. SWE302">
+        <button type="submit">Register Module</button>
+      </form>
+      {% if result %}
+        <div class="msg {{ 'ok' if result.ok else 'err' }}">{{ result.message }}</div>
+      {% endif %}
+      {% if state.registered_modules %}
+        <div class="hint" style="margin-top:14px;">Already registered: {{ state.registered_modules|join(', ') }}</div>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>

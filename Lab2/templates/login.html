@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSMS — Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="auth-shell">
+  <div class="auth-card">
+    <div class="crest">CST College</div>
+    <h1>Student Management System</h1>
+
+    <form method="POST" action="{{ url_for('login') }}">
+      <label for="student_id">Student ID</label>
+      <input type="text" id="student_id" name="student_id" placeholder="e.g. 02240360" autocomplete="off">
+      <div class="hint">Exactly 8 digits, numbers only (R1, R2).</div>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="••••••••">
+      <div class="hint">8–12 characters, incl. uppercase, lowercase &amp; a number (R3, R4).</div>
+
+      <button type="submit">Sign In</button>
+    </form>
+
+    {% if error %}
+      <div class="msg err">{{ error }}</div>
+    {% endif %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="msg ok">{{ message }}</div>
+      {% endfor %}
+    {% endwith %}
+
+    <div class="hint" style="margin-top:22px; text-align:center;">
+      Demo account: 02240360 / Passw0rd1
+    </div>
+  </div>
+</body>
+</html>

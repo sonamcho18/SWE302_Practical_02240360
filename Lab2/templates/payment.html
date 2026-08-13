@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSMS — Tuition Payment</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="topbar">
+    <div>
+      <div class="brand"><span class="mark">CST</span> Student Management System</div>
+      <div class="sub">Academic Records Portal</div>
+    </div>
+    <nav>
+      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('payment') }}" class="active">Tuition Payment</a>
+      <a href="{{ url_for('register') }}">Registration</a>
+      <a href="{{ url_for('results') }}">Results</a>
+      <a href="{{ url_for('logout') }}">Log Out</a>
+    </nav>
+  </div>
+
+  <div class="shell">
+    <div class="page-eyebrow">Section 3</div>
+    <h1 class="page-title">Tuition Payment</h1>
+    <div class="page-desc">Pay using Mobile Banking (R5), then upload your proof of transfer below.</div>
+
+    <div class="card" style="max-width:480px;">
+      <h2>Upload Payment Details</h2>
+      <form method="POST" enctype="multipart/form-data">
+        <label for="method">Payment Method</label>
+        <select id="method" name="method">
+          <option value="Mobile Banking">Mobile Banking</option>
+          <option value="Cash">Cash</option>
+          <option value="Bank Transfer">Bank Transfer (over-the-counter)</option>
+        </select>
+        <div class="hint">R5 — only Mobile Banking is accepted.</div>
+
+        <label for="screenshot">Payment Screenshot</label>
+        <input type="file" id="screenshot" name="screenshot">
+        <div class="hint">R6 — JPG, JPEG or PNG only.</div>
+
+        <label for="txn_number">Transaction Number</label>
+        <input type="text" id="txn_number" name="txn_number" placeholder="123-123456789">
+        <div class="hint">R7 — format NNN-NNNNNNNNN (13 characters).</div>
+
+        <button type="submit">Submit Payment</button>
+      </form>
+
+      {% if result %}
+        <div class="msg {{ 'ok' if result.ok else 'err' }}">{{ result.message }}</div>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>
