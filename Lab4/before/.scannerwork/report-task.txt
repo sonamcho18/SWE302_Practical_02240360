@@ -1,0 +1,6 @@
+projectKey=grade-manager-before
+serverUrl=http://localhost:9000
+serverVersion=26.8.0.126808
+dashboardUrl=http://localhost:9000/dashboard?id=grade-manager-before
+ceTaskId=d50d1179-bc49-42c2-b2d0-0aa0ee817f18
+ceTaskUrl=http://localhost:9000/api/ce/task?id=d50d1179-bc49-42c2-b2d0-0aa0ee817f18

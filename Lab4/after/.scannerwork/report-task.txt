@@ -1,0 +1,6 @@
+projectKey=grade-manager-after
+serverUrl=http://localhost:9000
+serverVersion=26.8.0.126808
+dashboardUrl=http://localhost:9000/dashboard?id=grade-manager-after
+ceTaskId=d2991770-00dc-46d3-b141-142364ea0e27
+ceTaskUrl=http://localhost:9000/api/ce/task?id=d2991770-00dc-46d3-b141-142364ea0e27
